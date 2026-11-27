@@ -28,7 +28,7 @@ public class CalculadoraImcCli {
                     break;
 
                 case 2:
-                    System.out.println("Funcionalidad pendiente.");
+                    ejecutarClasificacionImc();
                     break;
 
                 case 3:
@@ -69,6 +69,28 @@ public class CalculadoraImcCli {
         double imc = calculadora.calcularImc(peso, estatura);
 
         System.out.printf("Su IMC es: %.2f%n", imc);
+    }
+    private void ejecutarClasificacionImc() {
+
+    System.out.print("Ingrese su IMC: ");
+
+    if (!scanner.hasNextDouble()) {
+        System.out.println("Ingrese un valor numerico valido.");
+        scanner.next();
+        return;
+    }
+
+    double imc = scanner.nextDouble();
+
+    if (!Double.isFinite(imc) || imc <= 0) {
+        System.out.println("El IMC debe ser positivo y finito.");
+        return;
+    }
+
+    String clasificacion = calculadora.clasificarImc(imc);
+
+    System.out.println("Clasificacion: " + clasificacion);
+
     }
 
     private void mostrarMenu() {
