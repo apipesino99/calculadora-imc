@@ -32,7 +32,7 @@ public class CalculadoraImcCli {
                     break;
 
                 case 3:
-                    System.out.println("Funcionalidad pendiente.");
+                    ejecutarPesoMinimo();
                     break;
 
                 case 4:
@@ -53,6 +53,7 @@ public class CalculadoraImcCli {
         scanner.close();
     }
 
+    // Funcionalidad 1 - Andres
     private void ejecutarCalculoImc() {
 
         System.out.print("Ingrese su peso en kilogramos: ");
@@ -70,27 +71,53 @@ public class CalculadoraImcCli {
 
         System.out.printf("Su IMC es: %.2f%n", imc);
     }
+
+    // Funcionalidad 2 - Darelt
     private void ejecutarClasificacionImc() {
 
-    System.out.print("Ingrese su IMC: ");
+        System.out.print("Ingrese su IMC: ");
 
-    if (!scanner.hasNextDouble()) {
-        System.out.println("Ingrese un valor numerico valido.");
-        scanner.next();
-        return;
+        if (!scanner.hasNextDouble()) {
+            System.out.println("Ingrese un valor numerico valido.");
+            scanner.next();
+            return;
+        }
+
+        double imc = scanner.nextDouble();
+
+        if (!Double.isFinite(imc) || imc <= 0) {
+            System.out.println("El IMC debe ser positivo y finito.");
+            return;
+        }
+
+        String clasificacion = calculadora.clasificarImc(imc);
+
+        System.out.println("Clasificacion: " + clasificacion);
     }
 
-    double imc = scanner.nextDouble();
+    // Funcionalidad 3 - Shaday
+    private void ejecutarPesoMinimo() {
 
-    if (!Double.isFinite(imc) || imc <= 0) {
-        System.out.println("El IMC debe ser positivo y finito.");
-        return;
-    }
+        System.out.print("Ingrese su estatura en metros: ");
 
-    String clasificacion = calculadora.clasificarImc(imc);
+        if (!scanner.hasNextDouble()) {
+            System.out.println("Ingrese un valor numerico valido.");
+            scanner.next();
+            return;
+        }
 
-    System.out.println("Clasificacion: " + clasificacion);
+        double estatura = scanner.nextDouble();
 
+        if (!Double.isFinite(estatura) || estatura <= 0) {
+            System.out.println("La estatura debe ser positiva y finita.");
+            return;
+        }
+
+        double pesoMinimo = calculadora.calcularPesoMinimo(estatura);
+
+        System.out.printf(
+            "Peso minimo recomendado: %.2f kg%n", pesoMinimo
+        );
     }
 
     private void mostrarMenu() {
