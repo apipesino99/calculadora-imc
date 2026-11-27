@@ -3,6 +3,7 @@ import java.util.Scanner;
 public class CalculadoraImcCli {
 
     private final Scanner scanner = new Scanner(System.in);
+    private final CalculadoraImc calculadora = new CalculadoraImc();
 
     public void iniciar() {
 
@@ -23,7 +24,7 @@ public class CalculadoraImcCli {
             switch (opcion) {
 
                 case 1:
-                    System.out.println("Funcionalidad pendiente.");
+                    ejecutarCalculoImc();
                     break;
 
                 case 2:
@@ -50,6 +51,24 @@ public class CalculadoraImcCli {
         } while (opcion != 5);
 
         scanner.close();
+    }
+
+    private void ejecutarCalculoImc() {
+
+        System.out.print("Ingrese su peso en kilogramos: ");
+        double peso = scanner.nextDouble();
+
+        System.out.print("Ingrese su estatura en metros: ");
+        double estatura = scanner.nextDouble();
+
+        if (peso <= 0 || estatura <= 0) {
+            System.out.println("El peso y la estatura deben ser positivos.");
+            return;
+        }
+
+        double imc = calculadora.calcularImc(peso, estatura);
+
+        System.out.printf("Su IMC es: %.2f%n", imc);
     }
 
     private void mostrarMenu() {
